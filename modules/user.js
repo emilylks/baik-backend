@@ -1,9 +1,11 @@
 const User = require('./../database/db.js');
 
 const create = async (params) => {
-  let user = new User(params);
+  let user = new User(params.body);
+  console.log(params);
+  console.log(user);
   try {
-    await user.save();
+    await user.save().then((res) => console.log(res));
     return { message: "Success" };
   } catch (err) {
     return { error: err, message: "Failed to create user" };
