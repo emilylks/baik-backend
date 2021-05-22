@@ -26,7 +26,7 @@ const update = async (params) => {
   try {
     let user = await User.findOne({ name: params.body.name });
     if (user === null) throw "User Not Found";
-    await User.findOneAndUpdate({ name: params.body.name }, params);
+    await User.findOneAndUpdate({ name: params.body.name }, params.body);
     return { message: "Success" };
   } catch (err) {
     return { error: err, message: "User Not Found" };
