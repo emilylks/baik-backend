@@ -18,13 +18,13 @@ const userSchema = new Schema({
   checkIns: [{ sleepHours: Number, sleepQuality: Number, mood: Number, date: Date }],
 });
 
-userSchema.set('toJSON', {
+/*userSchema.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
         delete ret._id;
         delete ret.hash;
     }
-});
+});*/
 
 module.exports = mongoose.model('User', userSchema);
