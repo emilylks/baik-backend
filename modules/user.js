@@ -1,39 +1,35 @@
 const User = require('./../database/db.js');
 
-const create = (params) => {
+const create = async (params) => {
   let user = new User(params);
-  user.save()
-      .then(() => {
-        return { message: "Success" };
-      })
-      .catch(() => {
-        return { message: "Failed to create user" };
-      });
+  try {
+    await user.save();
+    return { message: "Success" };
+  } catch {
+    return { message: "Failed to create user" };
+  }
 }
 
-const fetch = (params) => {
-  User.findOne({ name: params.query.name })
-  .then((user) => {
+const fetch = async (params) => {
+  try {
+    let user = await User.findOne({ name: params.query.name });
     if (user === null) throw "User Not Found";
     else return { user: user, message: "Success" };
-  })
-  .catch(() => {
+  } catch {
     return { message: "User Not Found" };
-  });
+  }
 }
 
-const update = (params) => {
-  User.findOne({ name: params.name })
-  .then((user) => {
+const update = async (params) => {
+  try {
+    let user = await User.findOne({ name: params.name });
     if (user === null) throw "User Not Found";
-  })
-  .then(() => User.findOneAndUpdate({ name: params.name }, params))
-  .then(() => {
+
+    await User.findOneAndUpdate({ name: params.name }, params));
     return { message: "Success" };
-  })
-  .catch(() => {
+  } catch {
     return { message: "User Not Found" };
-  })
+  }
 }
 
 module.exports = { create, fetch, update };

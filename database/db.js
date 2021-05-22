@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb';
+var mongoDB = 'mongodb://127.0.0.1:27017/baik';
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 //Get the default connection
