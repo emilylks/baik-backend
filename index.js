@@ -10,6 +10,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/user', userRouter);
 
+app.get("/", (req, res) => {
+  res.json({ message: "Hello World" });
+});
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
