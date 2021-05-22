@@ -5,8 +5,8 @@ const create = async (params) => {
   try {
     await user.save();
     return { message: "Success" };
-  } catch {
-    return { message: "Failed to create user" };
+  } catch (err) {
+    return { error: err, message: "Failed to create user" };
   }
 }
 
@@ -15,8 +15,8 @@ const fetch = async (params) => {
     let user = await User.findOne({ name: params.query.name });
     if (user === null) throw "User Not Found";
     else return { user: user, message: "Success" };
-  } catch {
-    return { message: "User Not Found" };
+  } catch (err) {
+    return { error: err, message: "User Not Found" };
   }
 }
 
@@ -27,8 +27,8 @@ const update = async (params) => {
 
     await User.findOneAndUpdate({ name: params.name }, params));
     return { message: "Success" };
-  } catch {
-    return { message: "User Not Found" };
+  } catch (err) {
+    return { error: err, message: "User Not Found" };
   }
 }
 
