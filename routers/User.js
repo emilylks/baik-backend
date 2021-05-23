@@ -14,18 +14,18 @@ function createUser(req, res, next) {
 }
 
 function getUser(req, res, next) {
-	userService.fetch(req)
-		.then(user => res.json(user))
+	userService.fetch(req.body)
+		.then(success => res.json(success))
 }
 
 function updateUser(req, res, next) {
-	userService.update(req)
-		.then(user => res.json(user))
+	userService.update(req.body)
+		.then(success => res.json(success))
 }
 
 function updateUserNotes(req, res, next) {
-	userService.updateNotes(req)
-		.then(user => res.json(user))
+	userService.updateNotes(req.body)
+		.then(success => res.json(success))
 }
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const User = require('./../database/db.js');
 
 const create = async (params) => {
-  let user = new User(params.body);
+  let user = new User(params);
   console.log(params);
   console.log(user);
   try {
@@ -24,9 +24,9 @@ const fetch = async (params) => {
 
 const update = async (params) => {
   try {
-    let user = await User.findOne({ name: params.body.name });
+    let user = await User.findOne({ name: params.name });
     if (user === null) throw "User Not Found";
-    await User.findOneAndUpdate({ name: params.body.name }, params.body);
+    await User.findOneAndUpdate({ name: params.name }, params);
     return { message: "Success" };
   } catch (err) {
     return { error: err, message: "User Not Found" };
@@ -35,19 +35,21 @@ const update = async (params) => {
 
 const updateNotes = async (params) => {
   try {
-    let user = await User.findOne({ name: params.body.name });
+    let user = await User.findOne({ name: params.name });
     if (user === null) throw "User Not Found";
 
+    console.log("User object: " + user);
     var cal = user.calendar;
-    cal.push({ date: params.body.date, notes: params.body.notes });
+    cal.push({ date: params.date, notes: params.notes });
     let newParams = {
       userID: user.userID,
       name: user.name,
       checkIns: user.checkIns,
       calendar: cal
     }
+    console.log("New params: " + newParams);
 
-    await User.findOneAndUpdate({ name: params.body.name }, newParams);
+    await User.findOneAndUpdate({ name: params.name }, newParams);
     return { message: "Success" };
   } catch (err) {
     return { error: err, message: "User Not Found" };
