@@ -10,12 +10,12 @@ router.get('/', getUser);
 
 function createUser(req, res, next) {
 	userService.create(req.body)
-		.then(user => res.json(user))
+		.then(success => res.json(success))
 }
 
 function getUser(req, res, next) {
-	userService.fetch(req.body)
-		.then(success => res.json(success))
+	userService.fetch(req)
+		.then(user => res.json(user))
 }
 
 function updateUser(req, res, next) {

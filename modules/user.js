@@ -5,7 +5,7 @@ const create = async (params) => {
   console.log(params);
   console.log(user);
   try {
-    await user.save().then((res) => console.log(res));
+    await user.save();
     return { message: "Success" };
   } catch (err) {
     return { error: err, message: "Failed to create user" };
