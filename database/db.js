@@ -8,6 +8,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true, use
 
 //Get the default connection
 var db = mongoose.connection;
+console.log(db);
 
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -26,13 +27,13 @@ const userSchema = new Schema({
   calendar: [{ date: Number, notes: String }]
 });
 
-/*userSchema.set('toJSON', {
+userSchema.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
         delete ret._id;
         delete ret.hash;
     }
-});*/
+});
 
 module.exports = mongoose.model('User', userSchema);
