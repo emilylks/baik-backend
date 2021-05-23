@@ -22,7 +22,7 @@ const userSchema = new Schema({
     mood: Number,
     exercise: Boolean,
     journal: String,
-    date: Date
+    date: Number
   }],
   calendar: [{ date: Number, notes: String }]
 });
