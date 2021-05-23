@@ -9,7 +9,7 @@ router.put('/calendar', updateUserNotes);
 router.get('/', getUser);
 
 function createUser(req, res, next) {
-	userService.create(req)
+	userService.create(req.body)
 		.then(user => res.json(user))
 }
 
