@@ -16,7 +16,15 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const userSchema = new Schema({
   userID: { type: String, unique: true, required: true },
   name: { type: String, uniqe: true, required: true },
-  checkIns: [{ sleepHours: Number, sleepQuality: Number, mood: Number, date: Date }],
+  checkIns: [{
+    sleepHours: Number,
+    sleepQuality: Number,
+    mood: Number,
+    exercise: Boolean,
+    journal: String,
+    date: Date
+  }],
+  calendar: [{ date: Number, notes: String }]
 });
 
 userSchema.set('toJSON', {
