@@ -33,4 +33,24 @@ const update = async (params) => {
   }
 }
 
-module.exports = { create, fetch, update };
+const updateNotes = async (params) => {
+  try {
+    let user = await User.findOne({ name: params.body.name });
+    if (user === null) throw "User Not Found";
+
+    var cal = user.calendar;
+    cal.push({ date: params.date, notes: params.notes });
+    let newParams = {
+      userID: user.userID,
+      name: user.name,
+      checkIns: user.checkIns,
+      calendar: cal
+    }
+    await User.findOneAndUpdate({ name: params.body.name }, newParams);
+    return { message: "Success" };
+  } catch (err) {
+    return { error: err, message: "User Not Found" };
+  }
+}
+
+module.exports = { create, fetch, update, updateNotes };

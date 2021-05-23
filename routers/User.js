@@ -5,6 +5,7 @@ const userService = require('./../modules/user.js');
 // User Routes
 router.post('/', createUser);
 router.put('/', updateUser);
+router.put('/calendar', updateUserNotes);
 router.get('/', getUser);
 
 function createUser(req, res, next) {
@@ -19,6 +20,11 @@ function getUser(req, res, next) {
 
 function updateUser(req, res, next) {
 	userService.update(req)
+		.then(user => res.json(user))
+}
+
+function updateUserNotes(req, res, next) {
+	userService.updateNotes(req)
 		.then(user => res.json(user))
 }
 
