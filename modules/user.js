@@ -39,15 +39,8 @@ const updateNotes = async (params) => {
     if (user === null) throw "User Not Found";
 
     console.log("User object: " + user);
-    var cal = user.calendar;
-    cal.push({ date: params.date, notes: params.notes });
-    let newParams = {
-      userID: user.userID,
-      name: user.name,
-      checkIns: user.checkIns,
-      calendar: cal
-    }
-    console.log("New params: " + newParams);
+    user.calendar.push({ date: params.date, notes: params.notes });
+    console.log("New User object: " + user);
 
     await User.findOneAndUpdate({ name: params.name }, newParams);
     return { message: "Success" };
